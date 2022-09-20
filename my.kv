@@ -1,0 +1,309 @@
+#:import Factory kivy.factory.Factory
+#:import hex kivy.utils.get_color_from_hex
+WindowManager:
+    MainWindow:
+    AddPatient:
+    AddPatientsByFile:
+    AddPcrTest:
+    DeletePcr:
+    UpdatePcr:
+    Reports:
+<Button>
+    background_down:"lightsteelblue"
+    halign: 'center'
+    size_hint:0.21,0.2
+    background_normal:''
+    background_color: hex('#DADADA')
+    font_size: 20
+
+<Go_Back_Button@Button>:
+    pos_hint:{"x":0,"y":0}
+    size_hint:0.15,0.15
+    text:"Go Back"
+<Header@Label>:
+    font_size: 30
+<TextInput>:
+    size_hint: (.2, None)
+    height: 30
+    multiline: False
+<FloatLayout>
+        #title
+    canvas.before:
+        Color:
+            rgba:hex('#8fccba')
+        Rectangle:
+            pos:self.pos
+            size:self.size
+<Label>
+    color: hex('#252525')
+<MainWindow>:
+    name:"main"
+    FloatLayout:
+        Header:
+            pos_hint:{"x":0,"y":0.22}
+            text:"Covid-19 Tests Center"
+
+        Button:
+            pos_hint:{"x":0.15,"y":0.35}
+            text:"Add Patient"
+            on_release:
+                root.manager.transition.direction = "left"
+                app.root.current = "add_patient"
+        Button:
+            pos_hint:{"x":0.40,"y":0.35}
+            text:"Add Patients\nby file"
+            on_release:
+                root.manager.transition.direction = "left"
+                app.root.current = "add_patient_by_file"
+        Button:
+            pos_hint:{"x":0.65,"y":0.35}
+            text:"Add PCR Check"
+            on_release:
+                root.manager.transition.direction = "left"
+                app.root.current = "add_pcr"
+        Button:
+            pos_hint:{"x":0.15,"y":0.1}
+            text:"Delete\nPCR Check"
+            on_release:
+                root.manager.transition.direction = "left"
+                app.root.current = "Delete_Pcr"
+        Button:
+            pos_hint:{"x":0.40,"y":0.1}
+            text:"Update\nPCR Check"
+            on_release:
+                root.manager.transition.direction = "left"
+                app.root.current = "update_pcr"
+        Button:
+            pos_hint:{"x":0.65,"y":0.1}
+            text:"Reports"
+            on_release:
+                root.manager.transition.direction = "left"
+                app.root.current = "reports"
+<AddPatient>:
+    name:"add_patient"
+    Header:
+        pos_hint:{"x":0,"y":0.35}
+        text:"Add patient"
+    Label:
+        pos_hint:{"x":-0.2,"y":0.25}
+        text:"ID:"
+    TextInput:
+        pos_hint:{"x":0.40,"y":0.73}
+        id:'id_num'
+    Label:
+        pos_hint:{"x":-0.2,"y":0.15}
+        text:"Name:"
+    TextInput:
+        pos_hint:{"x":0.40,"y":0.63}
+        id:'name'
+    Label:
+        pos_hint:{"x":-0.2,"y":0.05}
+        text:"Birth Year:"
+    TextInput:
+        pos_hint:{"x":0.40,"y":0.53}
+        id:'bitrhYear'
+    Label:
+        pos_hint:{"x":-0.2,"y":-0.05}
+        text:"Phone number:"
+    TextInput:
+        pos_hint:{"x":0.40,"y":0.43}
+        id:'phone'
+    Label:
+        pos_hint:{"x":-0.2,"y":-0.15}
+        text:"E-mail:"
+    TextInput:
+        pos_hint:{"x":0.40,"y":0.33}
+        id:'email'
+    Header:
+        id: 'message_user'
+        pos_hint : {"x": 0.05, "y": -0.3}
+        font_size : '20sp'
+    Button:
+        size_hint:0.15,0.15
+        pos_hint:{"x":0.85,"y":0}
+        text: "Add"
+        on_press:
+            root.add_p()
+    Go_Back_Button:
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
+<AddPatientsByFile>:
+    name:"add_patient_by_file"
+    Header:
+        pos_hint:{"x":0,"y":0.35}
+        text:"Add patient with file:"
+    Label:
+        pos_hint:{"x":-0.15,"y":0.15}
+        text:"File:"
+    TextInput:
+        pos_hint:{"x":0.40,"y":0.63}
+        id:'file'
+    Header:
+        id: 'message_user'
+        pos_hint : {"x": 0.05, "y": -0.3}
+    Button:
+        size_hint:0.15,0.15
+        pos_hint:{"x":0.85,"y":0}
+        text: "Add"
+        on_press:
+            root.add_p_file()
+    Go_Back_Button:
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
+<AddPcrTest>:
+    name:"add_pcr"
+    Label:
+        font_size: 35
+        pos_hint:{"x":0,"y":0.35}
+        text:"Add PCR Test"
+    Label:
+        pos_hint : {"x": -0.1, "y": 0.2}
+        text:"Patient ID:"
+    TextInput:
+        pos_hint : {"x": 0.55, "y": 0.68}
+        id:'patient_id'
+    Label:
+        pos_hint : {"x": -0.1, "y": 0.1}
+        text:"PCR test ID:"
+    TextInput:
+        pos_hint : {"x": 0.55, "y": 0.58}
+        id:'pcr_id'
+    Label:
+        pos_hint : {"x": -0.12, "y": 0}
+        text:"Result:"
+    TextInput:
+        pos_hint : {"x": 0.55, "y": 0.48}
+        id:'result'
+    Header:
+        id: 'message_user'
+        pos_hint : {"x": 0.05, "y": -0.3}
+    Button:
+        size_hint:0.15,0.15
+        pos_hint:{"x":0.85,"y":0}
+        text: "Add"
+        on_press:
+            root.add_pcr()
+    Go_Back_Button:
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
+<DeletePcr>:
+    name:"Delete_Pcr"
+    Label:
+        font_size: 35
+        pos_hint:{"x":0,"y":0.35}
+        text:"Delete PCR Test:"
+    Label:
+        pos_hint:{"x":-0.1,"y":0.15}
+        text:"PCR test id:"
+    TextInput:
+        pos_hint:{"x":0.47,"y":0.63}
+        id:'in_pcr_id'
+    Label:
+        pos_hint:{"x":-0.16,"y":0.03}
+        text:"File of PCR tests to delete:"
+    TextInput:
+        pos_hint:{"x":0.47,"y":0.5}
+        id:'in_file'
+    Header:
+        id: 'message_user'
+        pos_hint : {"x": 0.05, "y": -0.3}
+    Button:
+        pos_hint:{"x":0.76,"y":0.63}
+        size_hint:0.1,0.05
+        text: "Delete"
+        background_color: hex('#ff0000')
+        on_press:
+            root.del_pcr()
+    Button:
+        pos_hint:{"x":0.76,"y":0.5}
+        size_hint:0.1,0.05
+        text: "Delete"
+        background_color: hex('#ff0000')
+        on_press:
+            root.del_pcr_file()
+    Go_Back_Button:
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
+<UpdatePcr>:
+    name:"update_pcr"
+    Header:
+        pos_hint:{"x":0,"y":0.35}
+        text:"Update PCR Test"
+    Label:
+        pos_hint : {"x": -0.1, "y": 0.2}
+        text:"PCR Test ID:"
+    TextInput:
+        pos_hint : {"x": 0.55, "y": 0.68}
+        id:'in_pcr_id'
+    Label:
+        pos_hint : {"x": -0.12, "y": 0.1}
+        text:"Result:"
+    TextInput:
+        pos_hint : {"x": 0.55, "y": 0.58}
+        id:'result'
+    Header:
+        id: 'message_user'
+        pos_hint : {"x": 0.05, "y": -0.3}
+    Button:
+        size_hint:0.15,0.15
+        pos_hint:{"x":0.85,"y":0}
+        text: "Update"
+        on_press:
+            root.update_pcr()
+    Go_Back_Button:
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
+<Reports>:
+    name:"reports"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            id: 'word_label'
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+    Label:
+        text:"Name:"
+        pos_hint:{"x":0,"y":-0.17}
+    TextInput:
+        pos_hint:{"x":0.55,"y":0.3}
+        id: 'name'
+    Button:
+        text: "Positive result\nreport"
+        on_press: root.positive_report()
+        pos_hint:{"x":0.83,"y":0.28}
+        font_size: 15
+        size_hint:0.15,0.09
+    Button:
+        text: "High risk\nreport"
+        on_press: root.high_risk()
+        pos_hint:{"x":0.83,"y":0.02}
+        font_size: 15
+        size_hint:0.15,0.09
+    Label:
+        text:"start date:"
+        pos_hint:{"x":-0.37,"y":-0.3}
+    TextInput:
+        pos_hint:{"x":0.18,"y":0.17}
+        id: 'start_date'
+    Label:
+        text:"end date:"
+        pos_hint:{"x":0.,"y":-0.3}
+    TextInput:
+        pos_hint:{"x":0.55,"y":0.17}
+        id: 'end_date'
+    Button:
+        font_size: 15
+        size_hint:0.15,0.09
+        pos_hint:{"x":0.83,"y":0.15}
+        text: "Show Records"
+        on_press: root.dates_report()
+    Go_Back_Button:
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
